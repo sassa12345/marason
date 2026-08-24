@@ -24,11 +24,11 @@ jobs:
           
       - name: Install dependencies
         # 👑 working-directory でフォルダを指定します
-        working-directory: ./your-app-folder-name
+        working-directory: ./flutter_app
         run: flutter pub get
         
       - name: Build APK
-        working-directory: ./your-app-folder-name
+        working-directory: ./flutter_app
         run: flutter build apk --release
         
       - name: Upload APK Artifact
@@ -36,7 +36,7 @@ jobs:
         with:
           name: android-apk
           # 👑 出力されるパスもフォルダ名を含める必要があります
-          path: your-app-folder-name/build/app/outputs/flutter-apk/app-release.apk
+          path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
 
   # ----------------------------------------
   # iOS用 IPAのビルド
@@ -51,15 +51,15 @@ jobs:
           channel: 'stable'
           
       - name: Install dependencies
-        working-directory: ./your-app-folder-name
+        working-directory: ./flutter_app
         run: flutter pub get
         
       - name: Build IPA
-        working-directory: ./your-app-folder-name
+        working-directory: ./flutter_app
         run: flutter build ipa --no-codesign
         
       - name: Upload IPA Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ios-ipa
-          path: your-app-folder-name/build/ios/archive/Runner.xcarchive
+          path: flutter_app/build/ios/archive/Runner.xcarchive
